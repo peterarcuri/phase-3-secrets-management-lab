@@ -26,7 +26,7 @@ import json
 import boto3
 from botocore.exceptions import ClientError
 
-from config import get_config
+from app.config import get_config
 
 
 def get_secret() -> str | None:

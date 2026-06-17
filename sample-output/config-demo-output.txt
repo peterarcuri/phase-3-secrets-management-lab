@@ -1,0 +1,6 @@
+Configuration loaded successfully
+Application: phase-3-secrets-management-lab
+Environment: development
+AWS Region: us-east-1
+AWS Secret Name: configured
+GitHub Token: not configured
