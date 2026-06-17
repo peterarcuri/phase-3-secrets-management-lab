@@ -2,7 +2,7 @@
 
 A security-focused DevSecOps project demonstrating modern secret management practices for applications, CI/CD pipelines, and cloud environments.
 
-This lab focuses on eliminating hardcoded credentials and implementing secure secret handling using environment variables, GitHub Actions Secrets, automated secret scanning, and AWS Secrets Manager.
+This lab focuses on eliminating hardcoded credentials and implementing secure secret handling using environment variables, GitHub Actions Secrets, automated secret scanning, and AWS Secrets Manager integration.
 
 ---
 
@@ -27,21 +27,34 @@ This project is designed to strengthen practical DevSecOps skills in:
 * `.env.example` template
 * No hardcoded secrets
 * AWS Secrets Manager integration demo
-* GitHub Actions secret usage
+* GitHub Actions Secrets usage
 * Automated secret scanning with Gitleaks
 * Pytest test suite
 * Ruff code quality validation
 
 ---
 
-## Planned Enhancements
+## Security Controls Demonstrated
 
-* Secret rotation automation
-* IAM policy validation
-* Multi-cloud secret management examples
-* HashiCorp Vault integration
-* Azure Key Vault demonstration
-* Kubernetes Secret integration
+### Secret Management
+
+* Environment variables
+* `.env.example` templates
+* AWS Secrets Manager
+* GitHub Actions Secrets
+
+### Secret Detection
+
+* Gitleaks repository scanning
+* Commit history scanning
+* Pull request scanning
+
+### Secure Development Practices
+
+* No hardcoded credentials
+* Least privilege principles
+* Secure configuration management
+* Separation of code and secrets
 
 ---
 
@@ -49,31 +62,27 @@ This project is designed to strengthen practical DevSecOps skills in:
 
 ```text
 phase-3-secrets-management-lab/
-│
 ├── .github/
 │   └── workflows/
 │       └── secrets-security.yml
-│
 ├── app/
 │   ├── __init__.py
-│   ├── config.py
-│   └── aws_secrets_demo.py
-│
+│   ├── aws_secrets_demo.py
+│   └── config.py
 ├── docs/
 │   ├── aws-secrets-manager-demo.md
 │   └── secret-handling.md
-│
+├── sample-output/
+│   ├── aws-secrets-demo-output.txt
+│   └── config-demo-output.txt
+├── screenshots/
 ├── tests/
 │   └── test_config.py
-│
-├── sample-output/
-├── screenshots/
-│
 ├── .env.example
 ├── .gitignore
 ├── pyproject.toml
-├── requirements.txt
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ---
@@ -92,13 +101,6 @@ phase-3-secrets-management-lab/
 ---
 
 # Installation
-
-Clone the repository:
-
-```bash
-git clone <repository-url>
-cd phase-3-secrets-management-lab
-```
 
 Create a virtual environment:
 
@@ -135,82 +137,29 @@ Important:
 
 ---
 
-# Running the Configuration Demo
-
-Execute:
+# Running Tests
 
 ```bash
-python app/config.py
+python -m pytest -v
 ```
 
-Example output:
+---
 
-```text
-Configuration loaded successfully
-Application: phase-3-secrets-management-lab
-Environment: development
-AWS Region: us-east-1
+# Running Ruff
+
+```bash
+ruff check .
 ```
 
 ---
 
 # Running the AWS Secrets Manager Demo
 
-Configure AWS credentials:
-
 ```bash
-aws configure
+python -m app.aws_secrets_demo
 ```
 
-Run the demonstration:
-
-```bash
-python app/aws_secrets_demo.py
-```
-
-Example output:
-
-```text
-Secret retrieved successfully.
-Available keys:
- - username
- - password
- - api_key
-```
-
-Secret values are intentionally not displayed.
-
----
-
-# Running Tests
-
-Execute the test suite:
-
-```bash
-python -m pytest -v
-```
-
-Expected output:
-
-```text
-2 passed
-```
-
----
-
-# Running Code Quality Checks
-
-Execute Ruff:
-
-```bash
-ruff check .
-```
-
-Expected output:
-
-```text
-All checks passed!
-```
+If AWS credentials are not configured, the application handles the condition safely without exposing sensitive information.
 
 ---
 
@@ -231,34 +180,9 @@ Workflow file:
 
 ---
 
-# Security Controls Demonstrated
-
-## Secret Management
-
-* Environment variables
-* `.env.example` templates
-* AWS Secrets Manager
-* GitHub Actions Secrets
-
-## Secret Detection
-
-* Gitleaks scanning
-* Repository scanning
-* Commit history scanning
-* Pull request scanning
-
-## Secure Development Practices
-
-* No hardcoded credentials
-* Least privilege principles
-* Secure configuration management
-* Separation of code and secrets
-
----
-
 # Documentation
 
-Additional project documentation is available in:
+Additional project documentation:
 
 ```text
 docs/secret-handling.md
@@ -271,55 +195,55 @@ docs/aws-secrets-manager-demo.md
 
 ## Project Structure
 
-Shows the repository layout including application code, documentation, tests, GitHub Actions workflow, and secret management configuration.
+Shows the overall repository layout including application code, tests, documentation, GitHub Actions workflow, and secret management configuration.
 
 ![Project Structure](screenshots/project-structure-secrets-management.png)
 
 ---
 
-## Configuration Loading
+## Configuration Loading Demonstration
 
-Shows the application successfully loading configuration values from environment variables.
+Displays the application successfully loading configuration values from environment variables.
 
 ![Configuration Demo](screenshots/config-demo-secrets-management.png)
 
 ---
 
-## Pytest Validation
+## Successful Pytest Execution
 
-Demonstrates successful execution of the configuration test suite.
+Demonstrates successful execution of the automated configuration test suite.
 
 ![Pytest Success](screenshots/pytest-success-secrets-management.png)
 
 ---
 
-## Ruff Validation
+## Ruff Code Quality Validation
 
-Shows code quality checks passing successfully.
+Shows Ruff validating code quality, formatting, and import organization.
 
 ![Ruff Success](screenshots/ruff-success-secrets-management.png)
 
 ---
 
-## AWS Secrets Manager Demonstration
+## AWS Secrets Manager Integration Demo
 
-Displays successful retrieval of secret metadata from AWS Secrets Manager.
+Demonstrates the AWS Secrets Manager integration workflow and secure handling of missing credentials or secret retrieval.
 
 ![AWS Secrets Manager Demo](screenshots/aws-secrets-demo.png)
 
 ---
 
-## GitHub Actions Security Pipeline
+## GitHub Actions Security Pipeline Success
 
-Shows the GitHub Actions workflow successfully executing all security checks.
+Displays successful execution of the GitHub Actions security workflow.
 
 ![GitHub Actions Success](screenshots/github-actions-success-secrets-management.png)
 
 ---
 
-## Gitleaks Secret Scan
+## Gitleaks Secret Scanning
 
-Demonstrates automated secret scanning and validation within the CI/CD pipeline.
+Demonstrates automated secret scanning and validation using Gitleaks.
 
 ![Gitleaks Scan](screenshots/gitleaks-scan-secrets-management.png)
 
@@ -332,11 +256,11 @@ Demonstrates automated secret scanning and validation within the CI/CD pipeline.
 * Cloud Security
 * AWS Security
 * CI/CD Security
-* Secure Configuration Management
-* GitHub Actions
 * Security Automation
+* GitHub Actions
 * Python Development
-* Security Testing
+* Secure Configuration Management
+* Secure Software Delivery
 
 ---
 
