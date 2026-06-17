@@ -24,7 +24,7 @@ from __future__ import annotations
 import json
 
 import boto3
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, NoCredentialsError
 
 from app.config import get_config
 
@@ -55,7 +55,12 @@ def get_secret() -> str | None:
         )
 
         return response.get("SecretString")
-    
+
+    except NoCredentialsError:
+        print("AWS credentials are not configured.")
+        print("No secret retrieved.")
+        return None
+
     except ClientError as exc:
         print(f"Unable to retrieve secret: {exc}")
         return None
